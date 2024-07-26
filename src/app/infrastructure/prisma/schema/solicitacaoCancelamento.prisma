@@ -1,0 +1,16 @@
+model SolicitacaoCancelamento {
+    id Int @id @default(autoincrement())
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+    data_fechamento DateTime?
+    aitId Int
+    ait AutoInfracaoTransito @relation(fields: [aitId], references: [id])
+    status CancelamentoStatus @default(PENDENTE)
+    justificativa String?
+}
+
+enum CancelamentoStatus {
+    PENDENTE
+    RECUSADO
+    ACEITO
+}

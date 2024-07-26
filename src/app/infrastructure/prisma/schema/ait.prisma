@@ -1,0 +1,17 @@
+model AutoInfracaoTransito {
+  id Int @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  nome String
+  data DateTime
+  nomeAgente String
+  nomeCondutor String
+  status Status @default(EM_ANDAMENTO)
+  solicitacoesCancelamento SolicitacaoCancelamento[]
+}
+
+enum Status {
+    EM_ANDAMENTO
+    SOLICITADO_CANCELAMENTO
+    CANCELADO
+}

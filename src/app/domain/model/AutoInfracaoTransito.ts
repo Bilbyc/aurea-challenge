@@ -6,3 +6,9 @@ export type AutoInfracaoTransito = {
     nomeCondutor: string,
     status: boolean //TODO: implementar enum
 }
+
+export enum Status {
+    EM_ANDAMENTO,
+    SOLICITADO_CANCELAMENTO,
+    CANCELADO
+}
