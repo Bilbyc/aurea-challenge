@@ -3,7 +3,7 @@ model AutoInfracaoTransito {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   nome String
-  data DateTime
+  data DateTime @db.Date
   nomeAgente String
   nomeCondutor String
   status Status @default(EM_ANDAMENTO)
