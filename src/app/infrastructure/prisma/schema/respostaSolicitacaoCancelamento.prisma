@@ -1,0 +1,8 @@
+model RespostaSolicitacaoCancelamento {
+    id Int @id @default(autoincrement())
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+    solicitacaoCancelamentoId Int @unique
+    solicitacaoCancelamento SolicitacaoCancelamento @relation(fields: [solicitacaoCancelamentoId], references: [id])
+    parecer String
+}

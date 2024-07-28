@@ -1,5 +1,5 @@
 export class AutoInfracaoTransito {
-    id: string
+    id: number
     nome: string
     data: Date
     nomeAgente: string
