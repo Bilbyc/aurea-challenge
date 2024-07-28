@@ -18,7 +18,7 @@ export class AitRepository implements IAitRepository {
     }
 
     async findById(id: number): Promise<AutoInfracaoTransito> {
-        const ait = await this.prisma.autoInfracaoTransito.findUnique({where: { id: id }})
+        const ait = await this.prisma.autoInfracaoTransito.findUnique({ where: { id: id }})
 
         return plainToClass(AutoInfracaoTransito, ait)
     }
@@ -33,6 +33,19 @@ export class AitRepository implements IAitRepository {
                 status: status
             }
         })
+    }
+
+    async updateByRespostaSolicitacao(id: number, status: Status): Promise<AutoInfracaoTransito> {
+        const ait = await this.prisma.autoInfracaoTransito.update({
+            where: {
+                id: id
+            },
+            data: {
+                status: status
+            },
+        })
+
+        return plainToClass(AutoInfracaoTransito, ait)
     }
 
 }
