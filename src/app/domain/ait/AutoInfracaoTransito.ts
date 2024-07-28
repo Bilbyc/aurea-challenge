@@ -8,7 +8,7 @@ export class AutoInfracaoTransito {
 }
 
 export enum Status {
-    EM_ANDAMENTO,
-    SOLICITADO_CANCELAMENTO,
-    CANCELADO
+    EM_ANDAMENTO = 'EM_ANDAMENTO',
+    SOLICITADO_CANCELAMENTO = 'SOLICITADO_CANCELAMENTO',
+    CANCELADO = 'CANCELADO'
 }
