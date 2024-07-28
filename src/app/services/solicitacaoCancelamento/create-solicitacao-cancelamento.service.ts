@@ -29,4 +29,12 @@ export class CreateSolicitacaoCancelamentoService {
 
         return await this.solicitacaoCancelamentoRepository.create(payload)
     } 
+
+    async listaSolicitacoesPendentes(): Promise<SolicitacaoCancelamento[]> {
+        return this.solicitacaoCancelamentoRepository.listPendentes()
+    }
+
+    async respondeSolicitacaoPendente(id: number) {
+
+    }
 }

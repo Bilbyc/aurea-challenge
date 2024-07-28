@@ -8,8 +8,8 @@ export class SolicitacaoCancelamento {
     justificativa: string
 }
 
-enum CancelamentoStatus {
-    PENDENTE,
-    RECUSADO,
-    ACEITO
+export enum CancelamentoStatus {
+    PENDENTE = 'PENDENTE',
+    RECUSADO = 'RECUSADO',
+    ACEITO = 'ACEITO'
 }
