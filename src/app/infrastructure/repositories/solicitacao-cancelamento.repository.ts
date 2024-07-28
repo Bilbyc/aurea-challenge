@@ -28,4 +28,23 @@ export class SolicitacaoCancelamentoRepository implements ISolicitacaoCancelamen
 
         return solicitacoesCancelamento.map((solicitacao) => plainToClass(SolicitacaoCancelamento, solicitacao)) 
     }
+
+    async findById(id: number): Promise<SolicitacaoCancelamento> {
+        const solicitacaoCancelamento = await this.prisma.solicitacaoCancelamento.findUnique({ where: { id: id }})
+
+        return plainToClass(SolicitacaoCancelamento, solicitacaoCancelamento)
+    }
+
+    async updateByRespostaSolicitacao(id: number, status: CancelamentoStatus): Promise<SolicitacaoCancelamento> {
+        const solicitacaoCancelamento = await this.prisma.solicitacaoCancelamento.update({
+            where: {
+                id: id
+            },
+            data: {
+                status: status
+            },
+        })
+
+        return plainToClass(SolicitacaoCancelamento, solicitacaoCancelamento)
+    }
 }
