@@ -6,6 +6,7 @@ export interface IAitRepository {
     create(data: CreateAitDto): Promise<AutoInfracaoTransito>
     findById(id: number): Promise<AutoInfracaoTransito>
     updateStatus(status: UpdateStatusDto): Promise<void>
+    updateByRespostaSolicitacao(id: number, status: Status): Promise<AutoInfracaoTransito>
 }
 
 export const IAitRepository = Symbol("IAitRepository")
