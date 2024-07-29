@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Req, Res, Get } from "@nestjs/common";
+import { Body, Controller, HttpStatus, Post, Req, Res, Get, UseFilters, HttpException } from "@nestjs/common";
 import { CreateAitDto } from "../../../domain/ait/dtos/create-ait.dto";
 import { CreateAitService } from "../../../services/ait/ait.service";
 import { AutoInfracaoTransito } from "../../../domain/ait/AutoInfracaoTransito";
@@ -14,9 +14,10 @@ export class AitController {
         @Res() res: Response): Promise<void> {
         try {
             const ait = await this.createAitService.createAit(createAitDto)
-            res.status(HttpStatus.OK).send(ait)
+            res.status(HttpStatus.CREATED).send(ait)
         } catch (error) {
-            console.error('Erro ao enviar solicitacao de criacao de AIT:', error.message)
+            console.error('Erro durante criacao de AIT:', error.message)
+            throw new HttpException(error.message, error.status)
         }
     }
 
