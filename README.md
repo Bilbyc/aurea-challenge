@@ -37,6 +37,9 @@ $ npm run test
 ### Set up Database and Port infos (.env)
 Crie um arquivo **.env** na pasta raiz do projeto e preencha as variáveis de ambiente abaixo. (Dentro do projeto existe um .env.example para referência)
 ```
+#App config
+PORT = 
+
 #Database config
 DATABASE_URL="postgresql://postgres:postgres@localhost:5434/databasename?schema=public"
 POSTGRESDB_USER=""
