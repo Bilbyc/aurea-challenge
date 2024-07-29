@@ -13,12 +13,12 @@ export class CreateSolicitacaoCancelamentoService {
     ){
     }
 
-    async createSolicitacao(payload: CreateSolicitacaoDto): Promise<SolicitacaoCancelamento | string> {
+    async createSolicitacao(payload: CreateSolicitacaoDto): Promise<SolicitacaoCancelamento> {
         const { aitId } = payload
         const autoInfracaoTransito = await this.aitRepository.findById(aitId)
 
         if(!autoInfracaoTransito) {
-            throw new HttpException(`Não existe AIT com o id informado`, HttpStatus.BAD_REQUEST)
+            throw new HttpException(`Não existe AIT com o id informado`, HttpStatus.NOT_FOUND)
         }
 
         if(autoInfracaoTransito.status !== Status.EM_ANDAMENTO){

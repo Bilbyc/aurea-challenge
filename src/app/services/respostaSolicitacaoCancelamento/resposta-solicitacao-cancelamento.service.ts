@@ -21,7 +21,7 @@ export class RespostaSolicitacaoCancelamentoService {
         const solicitacaoCancelamento = await this.solicitacaoCancelamentoRepository.findById(solicitacaoCancelamentoId)
 
         if(!solicitacaoCancelamento){
-            throw new HttpException('Não existe Solicitacao cancelamento com o id informado', HttpStatus.BAD_REQUEST)
+            throw new HttpException('Não existe Solicitacao cancelamento com o id informado', HttpStatus.NOT_FOUND)
         }
 
         if(solicitacaoCancelamento.status !== CancelamentoStatus.PENDENTE){
