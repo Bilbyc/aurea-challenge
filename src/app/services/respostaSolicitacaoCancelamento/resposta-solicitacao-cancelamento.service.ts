@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { CreateRespostaSolicitacaoDto } from "../../domain/respostaSolicitacaoCancelamento/dtos/create-resposta-solicitacao.dto";
 import { ISolicitacaoCancelamentoRepository } from "../../domain/solicitacaoCancelamento/repositories/solicitacao-cancelamento.repository";
 import { IRespostaSolicitacaoCancelamentoRepository } from "../../domain/respostaSolicitacaoCancelamento/repositories/resposta-solicitacao-cancelamento.repository";
@@ -18,10 +18,14 @@ export class RespostaSolicitacaoCancelamentoService {
     async respondeSolicitacaoCancelamento(payload: CreateRespostaSolicitacaoDto): Promise<RespostaSolicitacaoCancelamento | boolean> {
         const { solicitacaoCancelamentoId } = payload
 
-        const checkIfSolicitacaoExists = this.solicitacaoCancelamentoRepository.findById(solicitacaoCancelamentoId)
+        const solicitacaoCancelamento = await this.solicitacaoCancelamentoRepository.findById(solicitacaoCancelamentoId)
 
-        if(!checkIfSolicitacaoExists){
-            return false //TODO add exception
+        if(!solicitacaoCancelamento){
+            throw new HttpException('Não existe Solicitacao cancelamento com o id informado', HttpStatus.BAD_REQUEST)
+        }
+
+        if(solicitacaoCancelamento.status !== CancelamentoStatus.PENDENTE){
+            throw new HttpException('A solicitacao cancelamento informada não está PENDENTE', HttpStatus.BAD_REQUEST)
         }
 
         const respostaSolicitacaoCancelamento = await this.respostaSolicitacaoCancelamentoRepository.create(payload)
@@ -40,7 +44,6 @@ export class RespostaSolicitacaoCancelamentoService {
     
         const { aitId } = solicitacaoCancelamento
 
-        console.log(aitId)
         this.atualizaAit(Number(aitId), solicitacaoAceita)
     }
 

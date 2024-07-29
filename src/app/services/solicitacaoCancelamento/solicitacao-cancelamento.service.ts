@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { ISolicitacaoCancelamentoRepository } from "../../domain/solicitacaoCancelamento/repositories/solicitacao-cancelamento.repository";
 import { CreateSolicitacaoDto } from "../../domain/solicitacaoCancelamento/dtos/create-solicitacao.dto";
 import { SolicitacaoCancelamento } from "../../domain/solicitacaoCancelamento/SolicitacaoCancelamento";
@@ -15,10 +15,14 @@ export class CreateSolicitacaoCancelamentoService {
 
     async createSolicitacao(payload: CreateSolicitacaoDto): Promise<SolicitacaoCancelamento | string> {
         const { aitId } = payload
-        const checkIfAitExists = this.aitRepository.findById(aitId)
+        const autoInfracaoTransito = await this.aitRepository.findById(aitId)
 
-        if(!checkIfAitExists) {
-            return 'Ait nao existe'
+        if(!autoInfracaoTransito) {
+            throw new HttpException(`Não existe AIT com o id informado`, HttpStatus.BAD_REQUEST)
+        }
+
+        if(autoInfracaoTransito.status !== Status.EM_ANDAMENTO){
+            throw new HttpException('AIT já está em processo de cancelamento solicitado ou cancelado', HttpStatus.BAD_REQUEST)
         }
 
         await this.aitRepository.updateStatus({
