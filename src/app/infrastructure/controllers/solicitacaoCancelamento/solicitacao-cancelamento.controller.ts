@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpStatus, Post, Req, Res } from "@nestjs/common";
-import { CreateSolicitacaoCancelamentoService } from "../../../services/solicitacaoCancelamento/create-solicitacao-cancelamento.service";
+import { CreateSolicitacaoCancelamentoService } from "../../../services/solicitacaoCancelamento/solicitacao-cancelamento.service";
 import { CreateSolicitacaoDto } from "../../../domain/solicitacaoCancelamento/dtos/create-solicitacao.dto";
 import { Response } from "express";
 

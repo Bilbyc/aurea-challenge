@@ -3,8 +3,7 @@ import { ISolicitacaoCancelamentoRepository } from "../../domain/solicitacaoCanc
 import { CreateSolicitacaoDto } from "../../domain/solicitacaoCancelamento/dtos/create-solicitacao.dto";
 import { SolicitacaoCancelamento } from "../../domain/solicitacaoCancelamento/SolicitacaoCancelamento";
 import { IAitRepository } from "../../domain/ait/repositories/ait.repository";
-import { CreateAitDto } from "../../domain/ait/dtos/create-ait.dto";
-import { AutoInfracaoTransito, Status } from "../../domain/ait/AutoInfracaoTransito";
+import { Status } from "../../domain/ait/AutoInfracaoTransito";
 
 @Injectable()
 export class CreateSolicitacaoCancelamentoService {
@@ -32,9 +31,5 @@ export class CreateSolicitacaoCancelamentoService {
 
     async listaSolicitacoesPendentes(): Promise<SolicitacaoCancelamento[]> {
         return this.solicitacaoCancelamentoRepository.listPendentes()
-    }
-
-    async respondeSolicitacaoPendente(id: number) {
-
     }
 }
